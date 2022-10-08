@@ -16,12 +16,16 @@ class UI(QMainWindow):
         open = gspread.service_account(filename="creds.json")
         sheets = open.open_by_key(
             "1gVmaW9uDWLIy7-B90HDruVZSlTZnTSGv_mGj-BmWRTo")
-        worksheet = sheets.sheet1
+        worksheets = sheets.worksheet("MODUL 8")
 
-        jadwal = worksheet.get_all_values()
+        jadwal = worksheets.get_all_values()
         for x in range(len(jadwal)):
-            if x > 0:
-                self.insertRow(jadwal[x])
+            self.insertRow(jadwal[x])
+
+        saveButton = self.tabWidget.findChild(QPushButton)
+        infoBox = self.tabWidget.findChild(QTextEdit)
+        data = infoBox.toPlainText()
+        saveButton.clicked.connect(self.insertData)
 
     def insertRow(self, items):
         rowPosition = self.tableWidget.rowCount()
@@ -31,6 +35,15 @@ class UI(QMainWindow):
             self.tableWidget.setItem(rowPosition, x, qtablewidgetitem)
             qtablewidgetitem = self.tableWidget.item(rowPosition, x)
             qtablewidgetitem.setText(items[x])
+
+    def insertData(self):
+        open = gspread.service_account(filename="creds.json")
+        sheets = open.open_by_key(
+            "1gVmaW9uDWLIy7-B90HDruVZSlTZnTSGv_mGj-BmWRTo")
+        worksheet = sheets.worksheet("MODUL 8")
+        infoBox = self.tabWidget.findChild(QTextEdit)
+        peserta = infoBox.toPlainText()
+        worksheet.update_cell(2, 3, peserta)
 
 
 if __name__ == "__main__":
