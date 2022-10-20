@@ -7,10 +7,11 @@ import gspread
 
 
 class UI(QMainWindow):
-    def __init__(self):
+    def __init__(self, state='False'):
         super(UI, self).__init__()
         loadUi("Design_Trial.ui", self)
 
+        print(state)
         self.show()
 
         open = gspread.service_account(filename="creds.json")
