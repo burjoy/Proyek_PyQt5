@@ -33,20 +33,10 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QWidget" name="widget" native="true">
-        <widget class="QLCDNumber" name="lcdNumber">
+        <widget class="QPushButton" name="incButton_2">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>20</y>
-           <width>111</width>
-           <height>101</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
+           <x>100</x>
            <y>120</y>
            <width>31</width>
            <height>23</height>
@@ -56,10 +46,10 @@
           <string>&gt;</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="decButton_2">
          <property name="geometry">
           <rect>
-           <x>10</x>
+           <x>20</x>
            <y>120</y>
            <width>31</width>
            <height>23</height>
@@ -69,34 +59,359 @@
           <string>&lt;</string>
          </property>
         </widget>
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QWidget" name="horizontalLayoutWidget_4">
          <property name="geometry">
           <rect>
-           <x>160</x>
-           <y>50</y>
+           <x>0</x>
+           <y>20</y>
+           <width>21</width>
+           <height>121</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_7"/>
+        </widget>
+        <widget class="QWidget" name="horizontalLayoutWidget_5">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>20</y>
+           <width>21</width>
+           <height>121</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_8"/>
+        </widget>
+        <widget class="QComboBox" name="modul8_sesi_2">
+         <property name="geometry">
+          <rect>
+           <x>460</x>
+           <y>90</y>
+           <width>161</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QPushButton" name="saveJadwal_2">
+         <property name="geometry">
+          <rect>
+           <x>260</x>
+           <y>120</y>
+           <width>361</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Save</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_15">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>90</y>
+           <width>47</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Modul 8</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_16">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>60</y>
+           <width>47</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Modul 7</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_17">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>30</y>
+           <width>47</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Modul 6</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="modul6_tanggal_2">
+         <property name="geometry">
+          <rect>
+           <x>260</x>
+           <y>30</y>
            <width>191</width>
            <height>22</height>
           </rect>
          </property>
+         <item>
+          <property name="text">
+           <string>Senin (31/10)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Selasa (1/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Rabu (2/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kamis (3/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Jumat (4/11)</string>
+          </property>
+         </item>
         </widget>
-        <widget class="QComboBox" name="comboBox_2">
+        <widget class="QComboBox" name="modul7_sesi_2">
          <property name="geometry">
           <rect>
-           <x>360</x>
-           <y>50</y>
+           <x>460</x>
+           <y>60</y>
+           <width>161</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QComboBox" name="modul6_sesi_2">
+         <property name="geometry">
+          <rect>
+           <x>460</x>
+           <y>30</y>
+           <width>161</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QLabel" name="label_18">
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>10</y>
+           <width>47</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Tanggal</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_19">
+         <property name="geometry">
+          <rect>
+           <x>530</x>
+           <y>10</y>
+           <width>47</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Sesi</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="modul7_tanggal_2">
+         <property name="geometry">
+          <rect>
+           <x>260</x>
+           <y>60</y>
            <width>191</width>
            <height>22</height>
           </rect>
          </property>
+         <item>
+          <property name="text">
+           <string>Senin (7/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Selasa (8/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Rabu (9/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kamis (10/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Jumat (11/11)</string>
+          </property>
+         </item>
         </widget>
-        <widget class="QComboBox" name="comboBox_3">
+        <widget class="QComboBox" name="modul8_tanggal_2">
          <property name="geometry">
           <rect>
-           <x>560</x>
-           <y>50</y>
-           <width>181</width>
+           <x>260</x>
+           <y>90</y>
+           <width>191</width>
            <height>22</height>
           </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>Senin (14/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Selasa (15/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Rabu (16/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kamis (17/11)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Jumat (18/11)</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QLabel" name="label_20">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>111</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:rgb(73, 255, 249)</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_21">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>10</y>
+           <width>111</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Urutan Kelompok :</string>
          </property>
         </widget>
        </widget>

@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 import gspread
 
+hitung = 0
+
 
 class UI(QMainWindow):
     def __init__(self, state='False'):
@@ -13,6 +15,7 @@ class UI(QMainWindow):
 
         print(state)
         self.show()
+        global hitung
 
         self.showData()
 
@@ -22,6 +25,26 @@ class UI(QMainWindow):
         data = infoBox.toPlainText()
         saveButton.clicked.connect(self.insertData)
         refresh.clicked.connect(self.showData)
+
+        nambah = self.tabWidget.findChild(QPushButton, "incButton")
+        kurang = self.tabWidget.findChild(QPushButton, "decButton")
+        #kelompok = self.tabWidget.findChild(QLabel,"layarHitung")
+        #counter.setNum(hitung)
+
+        nambah.clicked.connect(self.counterUp)
+        kurang.clicked.connect(self.counterDown)
+
+    def counterUp(self):
+        global hitung
+        hitung += 1
+        print('naik' + str (hitung))
+        #self.counter.setNum(hitung)
+
+    def counterDown(self):
+        global hitung
+        hitung -= 1
+        print('turun' + str (hitung)) #COUNTER udah jalan tapi belum ngerti cara print labelnya
+        #self.counter.setNum(hitung)
 
     def insertRowSatu(self, items):
         rowPosition = self.Modul_6.rowCount()
