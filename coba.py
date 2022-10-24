@@ -26,10 +26,10 @@ class UI(QMainWindow):
         saveButton.clicked.connect(self.insertData)
         refresh.clicked.connect(self.showData)
 
-        nambah = self.tabWidget.findChild(QPushButton, "incButton")
-        kurang = self.tabWidget.findChild(QPushButton, "decButton")
-        #kelompok = self.tabWidget.findChild(QLabel,"layarHitung")
-        #counter.setNum(hitung)
+        nambah = self.findChild(QPushButton, "incButton")
+        kurang = self.findChild(QPushButton, "decButton")
+        kelompok = self.findChild(QLabel,"layarHitung")
+        kelompok.setNum(0)
 
         nambah.clicked.connect(self.counterUp)
         kurang.clicked.connect(self.counterDown)
@@ -38,13 +38,15 @@ class UI(QMainWindow):
         global hitung
         hitung += 1
         print('naik' + str (hitung))
-        #self.counter.setNum(hitung)
+        kelompok = self.findChild(QLabel,"layarHitung")
+        kelompok.setNum(hitung)
 
     def counterDown(self):
         global hitung
         hitung -= 1
-        print('turun' + str (hitung)) #COUNTER udah jalan tapi belum ngerti cara print labelnya
-        #self.counter.setNum(hitung)
+        print('turun' + str (hitung))
+        kelompok = self.findChild(QLabel,"layarHitung")
+        kelompok.setNum(hitung)
 
     def insertRowSatu(self, items):
         rowPosition = self.Modul_6.rowCount()

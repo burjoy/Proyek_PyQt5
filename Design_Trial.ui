@@ -33,7 +33,7 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QWidget" name="widget" native="true">
-        <widget class="QPushButton" name="incButton_2">
+        <widget class="QPushButton" name="incButton">
          <property name="geometry">
           <rect>
            <x>100</x>
@@ -46,7 +46,7 @@
           <string>&gt;</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="decButton_2">
+        <widget class="QPushButton" name="decButton">
          <property name="geometry">
           <rect>
            <x>20</x>
@@ -81,7 +81,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_8"/>
         </widget>
-        <widget class="QComboBox" name="modul8_sesi_2">
+        <widget class="QComboBox" name="modul8_sesi">
          <property name="geometry">
           <rect>
            <x>460</x>
@@ -111,7 +111,7 @@
           </property>
          </item>
         </widget>
-        <widget class="QPushButton" name="saveJadwal_2">
+        <widget class="QPushButton" name="saveJadwal">
          <property name="geometry">
           <rect>
            <x>260</x>
@@ -178,7 +178,7 @@
           <string>Modul 6</string>
          </property>
         </widget>
-        <widget class="QComboBox" name="modul6_tanggal_2">
+        <widget class="QComboBox" name="modul6_tanggal">
          <property name="geometry">
           <rect>
            <x>260</x>
@@ -213,7 +213,7 @@
           </property>
          </item>
         </widget>
-        <widget class="QComboBox" name="modul7_sesi_2">
+        <widget class="QComboBox" name="modul7_sesi">
          <property name="geometry">
           <rect>
            <x>460</x>
@@ -243,7 +243,7 @@
           </property>
          </item>
         </widget>
-        <widget class="QComboBox" name="modul6_sesi_2">
+        <widget class="QComboBox" name="modul6_sesi">
          <property name="geometry">
           <rect>
            <x>460</x>
@@ -309,7 +309,7 @@
           <string>Sesi</string>
          </property>
         </widget>
-        <widget class="QComboBox" name="modul7_tanggal_2">
+        <widget class="QComboBox" name="modul7_tanggal">
          <property name="geometry">
           <rect>
            <x>260</x>
@@ -344,7 +344,7 @@
           </property>
          </item>
         </widget>
-        <widget class="QComboBox" name="modul8_tanggal_2">
+        <widget class="QComboBox" name="modul8_tanggal">
          <property name="geometry">
           <rect>
            <x>260</x>
@@ -379,7 +379,7 @@
           </property>
          </item>
         </widget>
-        <widget class="QLabel" name="label_20">
+        <widget class="QLabel" name="layarHitung">
          <property name="geometry">
           <rect>
            <x>20</x>
@@ -494,7 +494,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Modul6">
      <attribute name="title">
