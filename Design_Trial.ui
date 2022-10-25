@@ -6,20 +6,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>784</width>
+    <height>622</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color = rgb(255, 253, 203)</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>370</y>
-      <width>781</width>
+      <y>380</y>
+      <width>771</width>
       <height>191</height>
      </rect>
     </property>
@@ -111,7 +114,7 @@
           </property>
          </item>
         </widget>
-        <widget class="QPushButton" name="saveJadwal">
+        <widget class="QPushButton" name="simpan">
          <property name="geometry">
           <rect>
            <x>260</x>
@@ -121,7 +124,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>Save</string>
+          <string>Simpan Jadwal</string>
          </property>
         </widget>
         <widget class="QLabel" name="label_15">
@@ -392,6 +395,8 @@
           <font>
            <family>Poppins</family>
            <pointsize>16</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="styleSheet">
@@ -412,6 +417,45 @@
          </property>
          <property name="text">
           <string>Urutan Kelompok :</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="indModul6">
+         <property name="geometry">
+          <rect>
+           <x>640</x>
+           <y>30</y>
+           <width>47</width>
+           <height>13</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="indModul7">
+         <property name="geometry">
+          <rect>
+           <x>640</x>
+           <y>60</y>
+           <width>47</width>
+           <height>13</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="indModul8">
+         <property name="geometry">
+          <rect>
+           <x>640</x>
+           <y>90</y>
+           <width>47</width>
+           <height>13</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
          </property>
         </widget>
        </widget>
@@ -494,7 +538,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Modul6">
      <attribute name="title">
@@ -672,11 +716,17 @@
    <widget class="QPushButton" name="refresh">
     <property name="geometry">
      <rect>
-      <x>650</x>
-      <y>60</y>
-      <width>75</width>
-      <height>23</height>
+      <x>604</x>
+      <y>42</y>
+      <width>121</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Poppins</family>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Refresh</string>
@@ -688,7 +738,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>784</width>
      <height>21</height>
     </rect>
    </property>

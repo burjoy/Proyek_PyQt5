@@ -22,10 +22,12 @@ class UI(QMainWindow):
         refresh = self.findChild(QPushButton, "refresh")
         saveButton = self.tabWidget.findChild(QPushButton)
         infoBox = self.tabWidget.findChild(QTextEdit)
+
         data = infoBox.toPlainText()
         saveButton.clicked.connect(self.insertData)
         refresh.clicked.connect(self.showData)
 
+        #counter
         nambah = self.findChild(QPushButton, "incButton")
         kurang = self.findChild(QPushButton, "decButton")
         kelompok = self.findChild(QLabel,"layarHitung")
@@ -33,18 +35,42 @@ class UI(QMainWindow):
 
         nambah.clicked.connect(self.counterUp)
         kurang.clicked.connect(self.counterDown)
+        
+        simpan = self.findChild(QPushButton, "simpan")
+        simpan.clicked.connect(self.saveJadwal)
+
+    def saveJadwal(self):
+        modul6Sesi = self.findChild(QComboBox, "modul6_sesi")
+        modul6Tanggal = self.findChild(QComboBox, "modul6_tanggal")          
+
+        modul7Sesi = self.findChild(QComboBox, "modul7_sesi")
+        modul7Tanggal = self.findChild(QComboBox, "modul7_tanggal")
+
+        modul8Sesi = self.findChild(QComboBox, "modul8_sesi")
+        modul8Tanggal = self.findChild(QComboBox, "modul8_tanggal")
+
+        print('\n\nNo Kelompok :' + str(hitung))
+        print('\nModul 6 :')
+        print("Tanggal :" + modul6Tanggal.currentText())
+        print("Sesi ke-" + modul6Sesi.currentText()) 
+
+        print('\nModul 7 :')
+        print("Tanggal :" + modul7Tanggal.currentText())
+        print("Sesi ke-" + modul7Sesi.currentText())         
+
+        print('\nModul 8 :')
+        print("Tanggal :" + modul8Tanggal.currentText())
+        print("Sesi ke-" + modul8Sesi.currentText()) 
 
     def counterUp(self):
         global hitung
         hitung += 1
-        print('naik' + str (hitung))
         kelompok = self.findChild(QLabel,"layarHitung")
         kelompok.setNum(hitung)
 
     def counterDown(self):
         global hitung
         hitung -= 1
-        print('turun' + str (hitung))
         kelompok = self.findChild(QLabel,"layarHitung")
         kelompok.setNum(hitung)
 
