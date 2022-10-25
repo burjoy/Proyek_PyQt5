@@ -14,6 +14,7 @@ class UI(QMainWindow):
         loadUi("Design_Trial.ui", self)
 
         print(state)
+        self.showstate(state)
         self.show()
         global hitung
 
@@ -38,6 +39,17 @@ class UI(QMainWindow):
         
         simpan = self.findChild(QPushButton, "simpan")
         simpan.clicked.connect(self.saveJadwal)
+    
+    def showstate(self,state):
+        statelabel = self.findChild(QLabel, "label_5")
+        if state == True : 
+            statelabel.setText("Aslab")
+            statelabel.setStyleSheet("background-color: yellow")
+            print('nice') 
+        else : 
+            statelabel.setText("Praktikan")
+            statelabel.setStyleSheet("background-color: orange")
+            print('not nice')
 
     def saveJadwal(self):
         modul6Sesi = self.findChild(QComboBox, "modul6_sesi")
