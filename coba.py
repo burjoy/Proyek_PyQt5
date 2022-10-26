@@ -7,9 +7,8 @@ import gspread
 
 hitung = 0
 
-
 class UI(QMainWindow):
-    def __init__(self, state= False):
+    def __init__(self, state= True):
         super(UI, self).__init__()
         loadUi("Design_Trial.ui", self)
 
@@ -21,9 +20,7 @@ class UI(QMainWindow):
 
         refresh = self.findChild(QPushButton, "refresh")
         saveButton = self.tabWidget.findChild(QPushButton)
-        infoBox = self.tabWidget.findChild(QTextEdit)
-
-        data = infoBox.toPlainText()
+        
         saveButton.clicked.connect(self.insertData)
         refresh.clicked.connect(self.showData)
 
