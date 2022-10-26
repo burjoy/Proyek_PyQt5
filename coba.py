@@ -16,14 +16,7 @@ class UI(QMainWindow):
         self.deterstate(state)
         self.show()
         global hitung
-
-        self.Modul_6.clear()
-        self.Modul_7.clear()
-        self.Modul_8.clear()
-
-        self.Modul_6.setRowCount(0)
-        self.Modul_7.setRowCount(0)
-        self.Modul_8.setRowCount(0)
+        
         open = gspread.service_account(filename="creds.json")
         sheets = open.open_by_key(
             "1gVmaW9uDWLIy7-B90HDruVZSlTZnTSGv_mGj-BmWRTo")
@@ -33,7 +26,7 @@ class UI(QMainWindow):
         worksheetsTiga = sheets.worksheet("MODUL 8")
         wsarr = np.array([worksheetsSatu,worksheetsDua,worksheetsTiga])
 
-        self.showData(worksheetsSatu,worksheetsDua,worksheetsTiga)
+        self.showData(wsarr)
 
         clear = self.findChild(QPushButton, "clear")
         clear.clicked.connect(lambda : self.clearData(self.tabWidget_2.currentIndex(),wsarr))
@@ -42,7 +35,7 @@ class UI(QMainWindow):
         saveButton.clicked.connect(self.insertData)
 
         saveBtnAslab = self.findChild(QPushButton, "saveaslab")
-        saveBtnAslab.clicked.connect(lambda : self.saveJadwalAslab(worksheetsSatu,worksheetsDua,worksheetsTiga))
+        saveBtnAslab.clicked.connect(lambda : self.saveJadwalAslab(wsarr))
         #allval = 
 
         #counter
@@ -90,7 +83,7 @@ class UI(QMainWindow):
         print("Tanggal :" + modul8Tanggal.currentText())
         print("Sesi ke-" + modul8Sesi.currentText()) 
 
-    def saveJadwalAslab(self,sheet1,sheet2,sheet3):
+    def saveJadwalAslab(self,sheetar):
         kodeAslab = self.findChild(QLineEdit, "kodeaslab")
         modulAslab = self.findChild(QComboBox, "modulaslab")
         hariAslab = self.findChild(QComboBox, "hariaslab")
@@ -108,15 +101,15 @@ class UI(QMainWindow):
             return
         else :
             if modulAslab.currentText() == "Modul 6" :
-                self.aslabUpdate(sheet1,hariAslab.currentText(),sesiaslab,kodeAslab.text())
+                self.aslabUpdate(sheetar[0],hariAslab.currentText(),sesiaslab,kodeAslab.text())
             elif modulAslab.currentText() == "Modul 7" :
-                self.aslabUpdate(sheet2,hariAslab.currentText(),sesiaslab,kodeAslab.text())
+                self.aslabUpdate(sheetar[1],hariAslab.currentText(),sesiaslab,kodeAslab.text())
             elif modulAslab.currentText() == "Modul 8" :
-                self.aslabUpdate(sheet3,hariAslab.currentText(),sesiaslab,kodeAslab.text())
+                self.aslabUpdate(sheetar[2],hariAslab.currentText(),sesiaslab,kodeAslab.text())
             
             self.aslabclear(hariAslab,modulAslab,sesiArray)
         
-        self.showData(sheet1,sheet2,sheet3)
+        self.showData(sheetar)
         
 
     def aslabUpdate(self,sheet,hari,sesiarr,kode):
@@ -209,7 +202,7 @@ class UI(QMainWindow):
         peserta = infoBox.toPlainText()
         worksheet.update_cell(2, 3, peserta)
 
-    def showData(self,sheet1,sheet2,sheet3):
+    def showData(self,sheetarr):
         self.Modul_6.clear()
         self.Modul_7.clear()
         self.Modul_8.clear()
@@ -218,21 +211,21 @@ class UI(QMainWindow):
         self.Modul_7.setRowCount(0)
         self.Modul_8.setRowCount(0)
         
-        jadwalSatu = sheet1.get_all_values()
+        jadwalSatu = sheetarr[0].get_all_values()
         for x in range(len(jadwalSatu)):
             self.insertRowSatu(jadwalSatu[x])
 
-        jadwalDua = sheet2.get_all_values()
+        jadwalDua = sheetarr[1].get_all_values()
         for x in range(len(jadwalDua)):
             self.insertRowDua(jadwalDua[x])
 
-        jadwalTiga = sheet3.get_all_values()
+        jadwalTiga = sheetarr[2].get_all_values()
         for x in range(len(jadwalTiga)):
             self.insertRowTiga(jadwalTiga[x])
 
     def clearData(self,tabnum,wsarr):
         wsarr[tabnum].batch_clear(["C2:G9"])
-        self.showData(wsarr[0],wsarr[1],wsarr[2])
+        self.showData(wsarr)
 
     def error(self,errormsg):
         msg = QMessageBox()
