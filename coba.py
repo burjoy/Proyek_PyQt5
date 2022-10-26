@@ -9,12 +9,11 @@ hitung = 0
 
 
 class UI(QMainWindow):
-    def __init__(self, state='False'):
+    def __init__(self, state= False):
         super(UI, self).__init__()
         loadUi("Design_Trial.ui", self)
 
-        print(state)
-        self.showstate(state)
+        self.deterstate(state)
         self.show()
         global hitung
 
@@ -40,16 +39,16 @@ class UI(QMainWindow):
         simpan = self.findChild(QPushButton, "simpan")
         simpan.clicked.connect(self.saveJadwal)
     
-    def showstate(self,state):
+    def deterstate(self,state):
         statelabel = self.findChild(QLabel, "label_5")
         if state == True : 
             statelabel.setText("Aslab")
-            statelabel.setStyleSheet("background-color: yellow")
-            print('nice') 
+            self.tabWidget.removeTab(0)
+            statelabel.setStyleSheet("background-color: yellow; font: 12pt;")
         else : 
             statelabel.setText("Praktikan")
-            statelabel.setStyleSheet("background-color: orange")
-            print('not nice')
+            self.tabWidget.removeTab(1)
+            statelabel.setStyleSheet("background-color: orange; font: 12pt;")
 
     def saveJadwal(self):
         modul6Sesi = self.findChild(QComboBox, "modul6_sesi")
