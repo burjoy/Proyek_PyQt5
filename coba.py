@@ -4,6 +4,7 @@ from json import load
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 import gspread
+import numpy as np
 
 hitung = 0
 
@@ -20,9 +21,12 @@ class UI(QMainWindow):
 
         refresh = self.findChild(QPushButton, "refresh")
         saveButton = self.tabWidget.findChild(QPushButton)
-        
+
         saveButton.clicked.connect(self.insertData)
         refresh.clicked.connect(self.showData)
+
+        saveBtnAslab = self.findChild(QPushButton, "saveaslab")
+        saveBtnAslab.clicked.connect(self.saveJadwalAslab)
 
         #counter
         nambah = self.findChild(QPushButton, "incButton")
@@ -38,14 +42,13 @@ class UI(QMainWindow):
     
     def deterstate(self,state):
         statelabel = self.findChild(QLabel, "label_5")
+        statelabel.setStyleSheet("background-color: yellow; font: 12pt;")
         if state == True : 
             statelabel.setText("Aslab")
             self.tabWidget.removeTab(0)
-            statelabel.setStyleSheet("background-color: yellow; font: 12pt;")
         else : 
             statelabel.setText("Praktikan")
             self.tabWidget.removeTab(1)
-            statelabel.setStyleSheet("background-color: orange; font: 12pt;")
 
     def saveJadwal(self):
         modul6Sesi = self.findChild(QComboBox, "modul6_sesi")
@@ -69,6 +72,29 @@ class UI(QMainWindow):
         print('\nModul 8 :')
         print("Tanggal :" + modul8Tanggal.currentText())
         print("Sesi ke-" + modul8Sesi.currentText()) 
+
+    def saveJadwalAslab(self):
+        kodeAslab = self.findChild(QLineEdit, "kodeaslab")
+        modulAslab = self.findChild(QComboBox, "modulaslab")
+        hariAslab = self.findChild(QComboBox, "hariaslab")
+        sesi1aslab = self.findChild(QCheckBox, "sesi1aslab")
+        sesi2aslab = self.findChild(QCheckBox, "sesi2aslab")
+        sesi3aslab = self.findChild(QCheckBox, "sesi3aslab")
+        sesi4aslab = self.findChild(QCheckBox, "sesi4aslab")
+        sesiaslab = np.array([sesi1aslab.isChecked(), sesi2aslab.isChecked(), sesi3aslab.isChecked(), sesi4aslab.isChecked()])
+        print(kodeAslab.text(), modulAslab.currentText(), hariAslab.currentText())
+        print(sesiaslab)
+        self.aslabclear(hariAslab,modulAslab,sesi1aslab,sesi2aslab,sesi3aslab,sesi4aslab)
+
+    def aslabclear(self,hariAslab,modulAslab,sesi1aslab,sesi2aslab,sesi3aslab,sesi4aslab):
+        hariAslab.setCurrentIndex(hariAslab.currentIndex()+1)
+        if hariAslab.currentIndex() == -1 :
+            modulAslab.setCurrentIndex(modulAslab.currentIndex()+1)
+            hariAslab.setCurrentIndex(0)
+        sesi1aslab.setCheckState(False)
+        sesi2aslab.setCheckState(False)
+        sesi3aslab.setCheckState(False)
+        sesi4aslab.setCheckState(False)
 
     def counterUp(self):
         global hitung
