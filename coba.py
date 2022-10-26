@@ -17,16 +17,33 @@ class UI(QMainWindow):
         self.show()
         global hitung
 
-        self.showData()
+        self.Modul_6.clear()
+        self.Modul_7.clear()
+        self.Modul_8.clear()
 
-        refresh = self.findChild(QPushButton, "refresh")
+        self.Modul_6.setRowCount(0)
+        self.Modul_7.setRowCount(0)
+        self.Modul_8.setRowCount(0)
+        open = gspread.service_account(filename="creds.json")
+        sheets = open.open_by_key(
+            "1gVmaW9uDWLIy7-B90HDruVZSlTZnTSGv_mGj-BmWRTo")
+
+        worksheetsSatu = sheets.worksheet("MODUL 6")
+        worksheetsDua = sheets.worksheet("MODUL 7")
+        worksheetsTiga = sheets.worksheet("MODUL 8")
+        wsarr = np.array([worksheetsSatu,worksheetsDua,worksheetsTiga])
+
+        self.showData(worksheetsSatu,worksheetsDua,worksheetsTiga)
+
+        clear = self.findChild(QPushButton, "clear")
+        clear.clicked.connect(lambda : self.clearData(self.tabWidget_2.currentIndex(),wsarr))
+
         saveButton = self.tabWidget.findChild(QPushButton)
-
         saveButton.clicked.connect(self.insertData)
-        refresh.clicked.connect(self.showData)
 
         saveBtnAslab = self.findChild(QPushButton, "saveaslab")
-        saveBtnAslab.clicked.connect(self.saveJadwalAslab)
+        saveBtnAslab.clicked.connect(lambda : self.saveJadwalAslab(worksheetsSatu,worksheetsDua,worksheetsTiga))
+        #allval = 
 
         #counter
         nambah = self.findChild(QPushButton, "incButton")
@@ -73,7 +90,7 @@ class UI(QMainWindow):
         print("Tanggal :" + modul8Tanggal.currentText())
         print("Sesi ke-" + modul8Sesi.currentText()) 
 
-    def saveJadwalAslab(self):
+    def saveJadwalAslab(self,sheet1,sheet2,sheet3):
         kodeAslab = self.findChild(QLineEdit, "kodeaslab")
         modulAslab = self.findChild(QComboBox, "modulaslab")
         hariAslab = self.findChild(QComboBox, "hariaslab")
@@ -81,20 +98,67 @@ class UI(QMainWindow):
         sesi2aslab = self.findChild(QCheckBox, "sesi2aslab")
         sesi3aslab = self.findChild(QCheckBox, "sesi3aslab")
         sesi4aslab = self.findChild(QCheckBox, "sesi4aslab")
-        sesiaslab = np.array([sesi1aslab.isChecked(), sesi2aslab.isChecked(), sesi3aslab.isChecked(), sesi4aslab.isChecked()])
-        print(kodeAslab.text(), modulAslab.currentText(), hariAslab.currentText())
-        print(sesiaslab)
-        self.aslabclear(hariAslab,modulAslab,sesi1aslab,sesi2aslab,sesi3aslab,sesi4aslab)
+        sesiArray = np.array([sesi1aslab,sesi2aslab,sesi3aslab,sesi4aslab])
+        sesiaslab = np.array([sesi1aslab.isChecked(),sesi2aslab.isChecked(),sesi3aslab.isChecked(),sesi4aslab.isChecked()])
+        #print(kodeAslab.text(), modulAslab.currentText(), hariAslab.currentText())
+        #print(sesiaslab)
 
-    def aslabclear(self,hariAslab,modulAslab,sesi1aslab,sesi2aslab,sesi3aslab,sesi4aslab):
+        if kodeAslab.text() == '' :
+            self.error("Tidak ada Kode Aslab")
+            return
+        else :
+            if modulAslab.currentText() == "Modul 6" :
+                self.aslabUpdate(sheet1,hariAslab.currentText(),sesiaslab,kodeAslab.text())
+            elif modulAslab.currentText() == "Modul 7" :
+                self.aslabUpdate(sheet2,hariAslab.currentText(),sesiaslab,kodeAslab.text())
+            elif modulAslab.currentText() == "Modul 8" :
+                self.aslabUpdate(sheet3,hariAslab.currentText(),sesiaslab,kodeAslab.text())
+            
+            self.aslabclear(hariAslab,modulAslab,sesiArray)
+        
+        self.showData(sheet1,sheet2,sheet3)
+        
+
+    def aslabUpdate(self,sheet,hari,sesiarr,kode):
+        if hari == 'Senin':
+            inthari = 1
+            for i in range(len(sesiarr)):
+                if sesiarr[i] == True:
+                    sheet.update_cell(2+2*i,2+inthari,kode)
+
+        elif hari == 'Selasa':
+            inthari = 2
+            for i in range(len(sesiarr)):
+                if sesiarr[i] == True:
+                    sheet.update_cell(2+2*i,2+inthari,kode)
+
+        elif hari == 'Rabu':
+            inthari = 3
+            for i in range(len(sesiarr)):
+                if sesiarr[i] == True:
+                    sheet.update_cell(2+2*i,2+inthari,kode)
+
+        elif hari == 'Kamis':
+            inthari = 4
+            for i in range(len(sesiarr)):
+                if sesiarr[i] == True:
+                    sheet.update_cell(2+2*i,2+inthari,kode)
+
+        elif hari == 'Jumat':
+            inthari = 5
+            for i in range(len(sesiarr)):
+                if sesiarr[i] == True:
+                    sheet.update_cell(2+2*i,2+inthari,kode)
+
+    def aslabclear(self,hariAslab,modulAslab,sesiarr):
         hariAslab.setCurrentIndex(hariAslab.currentIndex()+1)
         if hariAslab.currentIndex() == -1 :
             modulAslab.setCurrentIndex(modulAslab.currentIndex()+1)
             hariAslab.setCurrentIndex(0)
-        sesi1aslab.setCheckState(False)
-        sesi2aslab.setCheckState(False)
-        sesi3aslab.setCheckState(False)
-        sesi4aslab.setCheckState(False)
+        sesiarr[0].setCheckState(False)
+        sesiarr[1].setCheckState(False)
+        sesiarr[2].setCheckState(False)
+        sesiarr[3].setCheckState(False)
 
     def counterUp(self):
         global hitung
@@ -145,7 +209,7 @@ class UI(QMainWindow):
         peserta = infoBox.toPlainText()
         worksheet.update_cell(2, 3, peserta)
 
-    def showData(self):
+    def showData(self,sheet1,sheet2,sheet3):
         self.Modul_6.clear()
         self.Modul_7.clear()
         self.Modul_8.clear()
@@ -153,25 +217,30 @@ class UI(QMainWindow):
         self.Modul_6.setRowCount(0)
         self.Modul_7.setRowCount(0)
         self.Modul_8.setRowCount(0)
-        open = gspread.service_account(filename="creds.json")
-        sheets = open.open_by_key(
-            "1gVmaW9uDWLIy7-B90HDruVZSlTZnTSGv_mGj-BmWRTo")
-
-        worksheetsSatu = sheets.worksheet("MODUL 6")
-        jadwalSatu = worksheetsSatu.get_all_values()
+        
+        jadwalSatu = sheet1.get_all_values()
         for x in range(len(jadwalSatu)):
             self.insertRowSatu(jadwalSatu[x])
 
-        worksheetsDua = sheets.worksheet("MODUL 7")
-        jadwalDua = worksheetsDua.get_all_values()
+        jadwalDua = sheet2.get_all_values()
         for x in range(len(jadwalDua)):
             self.insertRowDua(jadwalDua[x])
 
-        worksheetsTiga = sheets.worksheet("MODUL 8")
-        jadwalTiga = worksheetsTiga.get_all_values()
+        jadwalTiga = sheet3.get_all_values()
         for x in range(len(jadwalTiga)):
             self.insertRowTiga(jadwalTiga[x])
 
+    def clearData(self,tabnum,wsarr):
+        wsarr[tabnum].batch_clear(["C2:G9"])
+        self.showData(wsarr[0],wsarr[1],wsarr[2])
+
+    def error(self,errormsg):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText("Error")
+        msg.setInformativeText(errormsg)
+        msg.setWindowTitle("Error")
+        msg.exec_()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
