@@ -74,21 +74,6 @@ class UI(QMainWindow):
         prakarr = np.array([modul6Sesi, modul6Tanggal, modul7Sesi,
                            modul7Tanggal, modul8Sesi, modul8Tanggal])
 
-        # print('\n\nNo Kelompok :' + str(str(hitung)))
-        # print('\nModul 6 :')
-        # print("Tanggal :" + modul6Tanggal.currentText())
-        # print("Sesi ke-" + modul6Sesi.currentText())
-
-        # print('\nModul 7 :')
-        # print("Tanggal :" + modul7Tanggal.currentText())
-        # print("Sesi ke-" + modul7Sesi.currentText())
-
-        # print('\nModul 8 :')
-        # print("Tanggal :" + modul8Tanggal.currentText())
-        # print("Sesi ke-" + modul8Sesi.currentText())
-
-        #sesiPrak = np.array([int(modul6Sesi.currentText()), int(modul7Sesi.currentText()), int(modul8Sesi.currentText())])
-        #hariPrak = np.array([modul6Tanggal.currentText(), modul7Tanggal.currentText(), modul8Tanggal.currentText()])
 
         self.pilihModul(sheetp[0], int(modul6Sesi.currentText()),
                         modul6Tanggal.currentText())
@@ -268,8 +253,6 @@ class UI(QMainWindow):
         sesiArray = np.array([sesi1aslab, sesi2aslab, sesi3aslab, sesi4aslab])
         sesiaslab = np.array([sesi1aslab.isChecked(), sesi2aslab.isChecked(
         ), sesi3aslab.isChecked(), sesi4aslab.isChecked()])
-        #print(kodeAslab.text(), modulAslab.currentText(), hariAslab.currentText())
-        # print(sesiaslab)
 
         if kodeAslab.text() == '':
             self.error("Tidak ada Kode Aslab")
