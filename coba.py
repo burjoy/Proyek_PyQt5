@@ -1,4 +1,5 @@
 from asyncio.windows_events import NULL
+from logging import error
 import sys
 import os
 from json import load
@@ -8,7 +9,6 @@ import gspread
 import numpy as np
 
 hitung = 1
-
 
 class UI(QMainWindow):
     def __init__(self, state=False):
@@ -74,15 +74,32 @@ class UI(QMainWindow):
         prakarr = np.array([modul6Sesi, modul6Tanggal, modul7Sesi,
                            modul7Tanggal, modul8Sesi, modul8Tanggal])
 
+        ind6 = self.findChild(QLabel, "indModul6")
+        ind7 = self.findChild(QLabel, "indModul7")
+        ind8 = self.findChild(QLabel, "indModul8")
+        indArr = np.array([ind6,ind7,ind8])
 
-        self.pilihModul(sheetp[0], int(modul6Sesi.currentText()),
+        errflag1 = self.pilihModul(sheetp[0], int(modul6Sesi.currentText()),
                         modul6Tanggal.currentText())
-        self.pilihModul(sheetp[1], int(modul7Sesi.currentText()),
+        errflag2 = self.pilihModul(sheetp[1], int(modul7Sesi.currentText()),
                         modul7Tanggal.currentText())
-        self.pilihModul(sheetp[2], int(modul8Sesi.currentText()),
+        errflag3 = self.pilihModul(sheetp[2], int(modul8Sesi.currentText()),
                         modul8Tanggal.currentText())
 
-        self.clearPrak(prakarr)
+        efArr = np.array([errflag1,errflag2,errflag3])
+        if False in efArr :
+            for i in range(len(efArr)):
+                if efArr[i] == False :
+                    indArr[i].setText("Bentrok")
+                else :
+                    indArr[i].setText("Aman")
+                
+            self.errorfunc("Jadwal Bentrok")
+            for x in indArr:
+                x.setText("status")
+        else:
+            self.clearPrak(prakarr)
+        
         self.showData(sheetp)
 
     def clearPrak(self, arr):
@@ -97,6 +114,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(3, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(3, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         3, 2+hariP, str(curr) + " " + str(hitung))
@@ -104,6 +123,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(5, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(5, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         5, 2+hariP, str(curr) + " " + str(hitung))
@@ -111,6 +132,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(7, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(7, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         7, 2+hariP, str(curr) + " " + str(hitung))
@@ -118,6 +141,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(9, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(9, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         9, 2+hariP, str(curr) + " " + str(hitung))
@@ -127,6 +152,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(3, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(3, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         3, 2+hariP, str(curr) + " " + str(hitung))
@@ -134,6 +161,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(5, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(5, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         5, 2+hariP, str(curr) + " " + str(hitung))
@@ -141,6 +170,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(7, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(7, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         7, 2+hariP, str(curr) + " " + str(hitung))
@@ -148,6 +179,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(9, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(9, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         9, 2+hariP, str(curr) + " " + str(hitung))
@@ -157,6 +190,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(3, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(3, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         3, 2+hariP, str(curr) + " " + str(hitung))
@@ -164,6 +199,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(5, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(5, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         5, 2+hariP, str(curr) + " " + str(hitung))
@@ -171,6 +208,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(7, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(7, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         7, 2+hariP, str(curr) + " " + str(hitung))
@@ -178,6 +217,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(9, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(9, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         9, 2+hariP, str(curr) + " " + str(hitung))
@@ -187,6 +228,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(3, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(3, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         3, 2+hariP, str(curr) + " " + str(hitung))
@@ -194,6 +237,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(5, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(5, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         5, 2+hariP, str(curr) + " " + str(hitung))
@@ -201,6 +246,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(7, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(7, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         7, 2+hariP, str(curr) + " " + str(hitung))
@@ -208,6 +255,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(9, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(9, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         9, 2+hariP, str(curr) + " " + str(hitung))
@@ -217,6 +266,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(3, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(3, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         3, 2+hariP, str(curr) + " " + str(hitung))
@@ -224,6 +275,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(5, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(5, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         5, 2+hariP, str(curr) + " " + str(hitung))
@@ -231,6 +284,8 @@ class UI(QMainWindow):
                 curr = sheetP.cell(7, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(7, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         7, 2+hariP, str(curr) + " " + str(hitung))
@@ -238,9 +293,13 @@ class UI(QMainWindow):
                 curr = sheetP.cell(9, 2+hariP).value
                 if curr is None:
                     sheetP.update_cell(9, 2+hariP, str(hitung))
+                elif " " in curr :
+                    return False
                 else:
                     sheetP.update_cell(
                         9, 2+hariP, str(curr) + " " + str(hitung))
+        return True
+
 
     def saveJadwalAslab(self, sheetar):
         kodeAslab = self.findChild(QLineEdit, "kodeaslab")
@@ -255,7 +314,7 @@ class UI(QMainWindow):
         ), sesi3aslab.isChecked(), sesi4aslab.isChecked()])
 
         if kodeAslab.text() == '':
-            self.error("Tidak ada Kode Aslab")
+            self.errorfunc("Tidak ada Kode Aslab")
             return
         else:
             if modulAslab.currentText() == "Modul 6":
@@ -382,7 +441,7 @@ class UI(QMainWindow):
             wsarr[tabnum].batch_clear(rangepraktikan)
         self.showData(wsarr)
 
-    def error(self, errormsg):
+    def errorfunc(self, errormsg):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
         msg.setText("Error")
