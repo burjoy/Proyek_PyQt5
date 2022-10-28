@@ -31,7 +31,7 @@ class UI(QMainWindow):
 
         clear = self.findChild(QPushButton, "clear")
         clear.clicked.connect(lambda: self.clearData(
-            self.tabWidget_2.currentIndex(), wsarr))
+            self.tabWidget_2.currentIndex(), wsarr,state))
 
         saveButton = self.tabWidget.findChild(QPushButton)
         saveButton.clicked.connect(lambda: self.saveJadwal(wsarr))
@@ -386,8 +386,13 @@ class UI(QMainWindow):
         for x in range(len(jadwalTiga)):
             self.insertRowTiga(jadwalTiga[x])
 
-    def clearData(self, tabnum, wsarr):
-        wsarr[tabnum].batch_clear(["C2:G9"])
+    def clearData(self, tabnum, wsarr,state):
+        rangeaslab =  ["C2:G2","C4:G4","C6:G6","C8:G8"]
+        rangepraktikan =  ["C3:G3","C5:G5","C7:G7","C9:G9"]
+        if state == True :
+            wsarr[tabnum].batch_clear(rangeaslab)
+        elif state == False :
+            wsarr[tabnum].batch_clear(rangepraktikan)
         self.showData(wsarr)
 
     def error(self, errormsg):
