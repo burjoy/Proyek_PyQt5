@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import sys
 import os
 from json import load
@@ -6,7 +7,7 @@ from PyQt5.uic import loadUi
 import gspread
 import numpy as np
 
-hitung = 0
+hitung = 1
 
 
 class UI(QMainWindow):
@@ -44,7 +45,7 @@ class UI(QMainWindow):
         nambah = self.findChild(QPushButton, "incButton")
         kurang = self.findChild(QPushButton, "decButton")
         kelompok = self.findChild(QLabel, "layarHitung")
-        kelompok.setNum(0)
+        kelompok.setNum(1)
 
         nambah.clicked.connect(self.counterUp)
         kurang.clicked.connect(self.counterDown)
@@ -70,7 +71,8 @@ class UI(QMainWindow):
         modul7Tanggal = self.findChild(QComboBox, "modul7_tanggal")
         modul8Sesi = self.findChild(QComboBox, "modul8_sesi")
         modul8Tanggal = self.findChild(QComboBox, "modul8_tanggal")
-        prakarr = np.array([modul6Sesi,modul6Tanggal,modul7Sesi,modul7Tanggal,modul8Sesi,modul8Tanggal])
+        prakarr = np.array([modul6Sesi, modul6Tanggal, modul7Sesi,
+                           modul7Tanggal, modul8Sesi, modul8Tanggal])
 
         # print('\n\nNo Kelompok :' + str(str(hitung)))
         # print('\nModul 6 :')
@@ -89,72 +91,171 @@ class UI(QMainWindow):
         #hariPrak = np.array([modul6Tanggal.currentText(), modul7Tanggal.currentText(), modul8Tanggal.currentText()])
 
         self.pilihModul(sheetp[0], int(modul6Sesi.currentText()),
-                         modul6Tanggal.currentText())
+                        modul6Tanggal.currentText())
         self.pilihModul(sheetp[1], int(modul7Sesi.currentText()),
-                         modul7Tanggal.currentText())
+                        modul7Tanggal.currentText())
         self.pilihModul(sheetp[2], int(modul8Sesi.currentText()),
-                         modul8Tanggal.currentText())
+                        modul8Tanggal.currentText())
 
         self.clearPrak(prakarr)
         self.showData(sheetp)
 
-    def clearPrak(self,arr):
+    def clearPrak(self, arr):
         self.counterUp()
         for i in range(len(arr)):
             arr[i].setCurrentIndex(0)
 
     def pilihModul(self, sheetP, sesiPraktikum, hariPraktikum):
-        if 'Senin' in hariPraktikum :
+        if 'Senin' in hariPraktikum:
             hariP = 1
             if sesiPraktikum == 1:
-                #curr = str(sheetP.cell(3, 2+hariP).value)+" "
-                sheetP.update_cell(3, 2+hariP, str(hitung))
+                curr = sheetP.cell(3, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(3, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        3, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 2:
-                sheetP.update_cell(5, 2+hariP, str(hitung))
+                curr = sheetP.cell(5, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(5, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        5, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 3:
-                sheetP.update_cell(7, 2+hariP, str(hitung))
+                curr = sheetP.cell(7, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(7, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        7, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 4:
-                sheetP.update_cell(9, 2+hariP, str(hitung))
+                curr = sheetP.cell(9, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(9, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        9, 2+hariP, str(curr) + " " + str(hitung))
         elif 'Selasa' in hariPraktikum:
             hariP = 2
             if sesiPraktikum == 1:
-                sheetP.update_cell(3, 2+hariP, str(hitung))
+                curr = sheetP.cell(3, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(3, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        3, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 2:
-                sheetP.update_cell(5, 2+hariP, str(hitung))
+                curr = sheetP.cell(5, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(5, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        5, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 3:
-                sheetP.update_cell(7, 2+hariP, str(hitung))
+                curr = sheetP.cell(7, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(7, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        7, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 4:
-                sheetP.update_cell(9, 2+hariP, str(hitung))
+                curr = sheetP.cell(9, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(9, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        9, 2+hariP, str(curr) + " " + str(hitung))
         elif 'Rabu' in hariPraktikum:
             hariP = 3
             if sesiPraktikum == 1:
-                sheetP.update_cell(3, 2+hariP, str(hitung))
+                curr = sheetP.cell(3, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(3, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        3, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 2:
-                sheetP.update_cell(5, 2+hariP, str(hitung))
+                curr = sheetP.cell(5, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(5, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        5, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 3:
-                sheetP.update_cell(7, 2+hariP, str(hitung))
+                curr = sheetP.cell(7, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(7, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        7, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 4:
-                sheetP.update_cell(9, 2+hariP, str(hitung))
+                curr = sheetP.cell(9, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(9, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        9, 2+hariP, str(curr) + " " + str(hitung))
         elif 'Kamis' in hariPraktikum:
             hariP = 4
             if sesiPraktikum == 1:
-                sheetP.update_cell(3, 2+hariP, str(hitung))
+                curr = sheetP.cell(3, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(3, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        3, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 2:
-                sheetP.update_cell(5, 2+hariP, str(hitung))
+                curr = sheetP.cell(5, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(5, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        5, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 3:
-                sheetP.update_cell(7, 2+hariP, str(hitung))
+                curr = sheetP.cell(7, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(7, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        7, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 4:
-                sheetP.update_cell(9, 2+hariP, str(hitung))
+                curr = sheetP.cell(9, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(9, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        9, 2+hariP, str(curr) + " " + str(hitung))
         elif 'Jumat' in hariPraktikum:
             hariP = 5
             if sesiPraktikum == 1:
-                sheetP.update_cell(3, 2+hariP, str(hitung))
+                curr = sheetP.cell(3, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(3, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        3, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 2:
-                sheetP.update_cell(5, 2+hariP, str(hitung))
+                curr = sheetP.cell(5, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(5, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        5, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 3:
-                sheetP.update_cell(7, 2+hariP, str(hitung))
+                curr = sheetP.cell(7, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(7, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        7, 2+hariP, str(curr) + " " + str(hitung))
             elif sesiPraktikum == 4:
-                sheetP.update_cell(9, 2+hariP, str(hitung))
+                curr = sheetP.cell(9, 2+hariP).value
+                if curr is None:
+                    sheetP.update_cell(9, 2+hariP, str(hitung))
+                else:
+                    sheetP.update_cell(
+                        9, 2+hariP, str(curr) + " " + str(hitung))
 
     def saveJadwalAslab(self, sheetar):
         kodeAslab = self.findChild(QLineEdit, "kodeaslab")
