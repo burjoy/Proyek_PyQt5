@@ -9,7 +9,7 @@ import numpy as np
 hitung = 0
 
 class UI(QMainWindow):
-    def __init__(self, state= True):
+    def __init__(self, state= False):
         super(UI, self).__init__()
         loadUi("Design_Trial.ui", self)
 
@@ -32,7 +32,7 @@ class UI(QMainWindow):
         clear.clicked.connect(lambda : self.clearData(self.tabWidget_2.currentIndex(),wsarr))
 
         saveButton = self.tabWidget.findChild(QPushButton)
-        saveButton.clicked.connect(self.insertData)
+        saveButton.clicked.connect(lambda : self.saveJadwal(wsarr))
 
         saveBtnAslab = self.findChild(QPushButton, "saveaslab")
         saveBtnAslab.clicked.connect(lambda : self.saveJadwalAslab(wsarr))
@@ -60,13 +60,12 @@ class UI(QMainWindow):
             statelabel.setText("Praktikan")
             self.tabWidget.removeTab(1)
 
-    def saveJadwal(self):
+    def saveJadwal(self, sheetp):
+        
         modul6Sesi = self.findChild(QComboBox, "modul6_sesi")
         modul6Tanggal = self.findChild(QComboBox, "modul6_tanggal")          
-
         modul7Sesi = self.findChild(QComboBox, "modul7_sesi")
         modul7Tanggal = self.findChild(QComboBox, "modul7_tanggal")
-
         modul8Sesi = self.findChild(QComboBox, "modul8_sesi")
         modul8Tanggal = self.findChild(QComboBox, "modul8_tanggal")
 
@@ -81,8 +80,123 @@ class UI(QMainWindow):
 
         print('\nModul 8 :')
         print("Tanggal :" + modul8Tanggal.currentText())
-        print("Sesi ke-" + modul8Sesi.currentText()) 
+        print("Sesi ke-" + modul8Sesi.currentText())
 
+        #sesiPrak = np.array([int(modul6Sesi.currentText()), int(modul7Sesi.currentText()), int(modul8Sesi.currentText())])
+        #hariPrak = np.array([modul6Tanggal.currentText(), modul7Tanggal.currentText(), modul8Tanggal.currentText()])
+
+        self.pilihModul6(sheetp[0], int(modul6Sesi.currentText()), modul6Tanggal.currentText())
+        #self.pilihModul7(sheetp[1], sesiPrak[1], hariPrak[1])
+
+        self.showData(sheetp)
+        
+       
+    def pilihModul6(self, sheetP, sesiPraktikum, hariPraktikum):
+
+        if hariPraktikum == 'Senin (31/10)' :
+            hariP = 1
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)
+        elif hariPraktikum == 'Selasa (1/11)' :
+            hariP = 2
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)            
+        elif hariPraktikum == 'Rabu (2/11)' :
+            hariP = 3
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)
+        elif hariPraktikum == 'Kamis (3/11)' :
+            hariP = 4
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)
+        elif hariPraktikum == 'Jumat (4/11)' :       
+            hariP = 5
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)
+
+    def pilihModul7(self, sheetP, sesiPraktikum, hariPraktikum):
+        if hariPraktikum == 'Senin (7/11)' :
+            hariP = 1
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)
+        elif hariPraktikum == 'Selasa (8/11)' :
+            hariP = 2
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)            
+        elif hariPraktikum == 'Rabu (9/11)' :
+            hariP = 3
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)
+        elif hariPraktikum == 'Kamis (10/11)' :
+            hariP = 4
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)
+        elif hariPraktikum == 'Jumat (11/11)' :     
+            hariP = 5
+            if sesiPraktikum == 1 :
+               sheetP.update_cell(3,2+hariP,hitung)
+            elif sesiPraktikum == 2 :
+                sheetP.update_cell(5,2+hariP,hitung)
+            elif sesiPraktikum == 3 :
+                sheetP.update_cell(7,2+hariP,hitung)
+            elif sesiPraktikum == 4 :
+                sheetP.update_cell(9,2+hariP,hitung)
+    
+    
     def saveJadwalAslab(self,sheetar):
         kodeAslab = self.findChild(QLineEdit, "kodeaslab")
         modulAslab = self.findChild(QComboBox, "modulaslab")
@@ -192,15 +306,6 @@ class UI(QMainWindow):
             qtablewidgetitem = self.Modul_8.item(rowPosition, x)
             qtablewidgetitem.setText(items[x])
 
-    def insertData(self):
-        open = gspread.service_account(
-            filename="creds.json")
-        sheets = open.open_by_key(
-            "1gVmaW9uDWLIy7-B90HDruVZSlTZnTSGv_mGj-BmWRTo")
-        worksheet = sheets.worksheet("MODUL 8")
-        infoBox = self.tabWidget.findChild(QTextEdit)
-        peserta = infoBox.toPlainText()
-        worksheet.update_cell(2, 3, peserta)
 
     def showData(self,sheetarr):
         self.Modul_6.clear()

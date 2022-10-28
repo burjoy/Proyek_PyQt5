@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="addjadwalprak">
      <attribute name="title">
@@ -879,7 +879,7 @@ font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
      <x>0</x>
      <y>0</y>
      <width>784</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
