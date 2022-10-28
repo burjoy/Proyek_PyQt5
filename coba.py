@@ -70,19 +70,20 @@ class UI(QMainWindow):
         modul7Tanggal = self.findChild(QComboBox, "modul7_tanggal")
         modul8Sesi = self.findChild(QComboBox, "modul8_sesi")
         modul8Tanggal = self.findChild(QComboBox, "modul8_tanggal")
+        prakarr = np.array([modul6Sesi,modul6Tanggal,modul7Sesi,modul7Tanggal,modul8Sesi,modul8Tanggal])
 
-        print('\n\nNo Kelompok :' + str(str(hitung)))
-        print('\nModul 6 :')
-        print("Tanggal :" + modul6Tanggal.currentText())
-        print("Sesi ke-" + modul6Sesi.currentText())
+        # print('\n\nNo Kelompok :' + str(str(hitung)))
+        # print('\nModul 6 :')
+        # print("Tanggal :" + modul6Tanggal.currentText())
+        # print("Sesi ke-" + modul6Sesi.currentText())
 
-        print('\nModul 7 :')
-        print("Tanggal :" + modul7Tanggal.currentText())
-        print("Sesi ke-" + modul7Sesi.currentText())
+        # print('\nModul 7 :')
+        # print("Tanggal :" + modul7Tanggal.currentText())
+        # print("Sesi ke-" + modul7Sesi.currentText())
 
-        print('\nModul 8 :')
-        print("Tanggal :" + modul8Tanggal.currentText())
-        print("Sesi ke-" + modul8Sesi.currentText())
+        # print('\nModul 8 :')
+        # print("Tanggal :" + modul8Tanggal.currentText())
+        # print("Sesi ke-" + modul8Sesi.currentText())
 
         #sesiPrak = np.array([int(modul6Sesi.currentText()), int(modul7Sesi.currentText()), int(modul8Sesi.currentText())])
         #hariPrak = np.array([modul6Tanggal.currentText(), modul7Tanggal.currentText(), modul8Tanggal.currentText()])
@@ -94,13 +95,20 @@ class UI(QMainWindow):
         self.pilihModul8(sheetp[2], int(modul8Sesi.currentText()),
                          modul8Tanggal.currentText())
 
+        self.clearPrak(prakarr)
         self.showData(sheetp)
 
-    def pilihModul6(self, sheetP, sesiPraktikum, hariPraktikum):
+    def clearPrak(self,arr):
+        self.counterUp()
+        for i in range(len(arr)):
+            arr[i].setCurrentIndex(0)
 
+
+    def pilihModul6(self, sheetP, sesiPraktikum, hariPraktikum):
         if hariPraktikum == 'Senin (31/10)':
             hariP = 1
             if sesiPraktikum == 1:
+                #curr = str(sheetP.cell(3, 2+hariP).value)+" "
                 sheetP.update_cell(3, 2+hariP, str(hitung))
             elif sesiPraktikum == 2:
                 sheetP.update_cell(5, 2+hariP, str(hitung))
