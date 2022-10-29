@@ -1,5 +1,5 @@
 # Schedule planner for control laboratory using “gspread” API
-Proyek pembuatan GUI dengan python dalam rangka pencaslaban kendali 2022
+Proyek pembuatan GUI dengan python melalui interface PyQT5 dalam rangka pencaslaban kendali 2022
 
 Required Module
   - PyQT5
@@ -16,7 +16,13 @@ Tata Cara Penggunaan
  Fitur yang terdapat pada program antara lain
  
   **Sebagai Aslab**
-  
+    - Input Sesi Aslab (Tanggal, Waktu Sesi, Kode Aslab)
+    - Error Handling apabila sesi telah digunakan
+    - Terkoneksi dengan google sheet pengambilan jadwal
   
   
   **Sebagai Praktikan**
+    - Input Sesi Praktikan (Tanggal, Waktu Sesi, Kode Aslab)
+    - Counter urutan praktikan untuk mengambil jadwal
+    - Terkoneksi dengan google sheet pengambilan jadwal
+    - Error handling apabila sesi telah diisi
