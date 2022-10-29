@@ -1,4 +1,4 @@
-# Schedule planner for control laboratory using “gspread” API
+# Schedule planner for control laboratory with PyQT5 using “gspread” API
 Proyek pembuatan GUI dengan python melalui interface PyQT5 dalam rangka pencaslaban kendali 2022
 
 Required Module
