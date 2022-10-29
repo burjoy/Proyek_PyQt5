@@ -9,47 +9,56 @@ import gspread
 import numpy as np
 import requests
 
+# global variable untuk counter
 hitung = 1
 
-
+# inisialisasi class untuk UI
 class UI(QMainWindow):
     def __init__(self, state=False):
+        # panggil UI dan load file.ui untuk mainwindow
         super(UI, self).__init__()
         loadUi("Design_Trial.ui", self)
-
-        self.deterstate(state)
         self.show()
+
+        # menentukan state login (aslab/praktikan)
+        self.deterstate(state)
+        # hitung sebagai variabel global
         global hitung
 
+        # tes koneksi internet dan error handling
         try:
             request = requests.get("http://www.google.com", timeout=10)
         except (requests.ConnectionError, requests.Timeout) as exception:
             self.errorfunc("Tidak ada Koneksi Internet")
 
+        # membaca googlesheet menggunakan service account
         open = gspread.service_account(filename="creds.json")
         sheets = open.open_by_key(
             "1gVmaW9uDWLIy7-B90HDruVZSlTZnTSGv_mGj-BmWRTo")
 
+        # inisialisasi worksheet modul 6,7,8 dan array worksheet
         worksheetsSatu = sheets.worksheet("MODUL 6")
         worksheetsDua = sheets.worksheet("MODUL 7")
         worksheetsTiga = sheets.worksheet("MODUL 8")
-
         wsarr = np.array([worksheetsSatu, worksheetsDua, worksheetsTiga])
 
+        # menunjukkan data awal pada tiap sheet
         self.showData(wsarr)
 
+        # inisialisasi clear button
         clear = self.findChild(QPushButton, "clear")
         clear.clicked.connect(lambda: self.clearData(
             self.tabWidget_2.currentIndex(), wsarr, state))
 
-        saveButton = self.tabWidget.findChild(QPushButton)
-        saveButton.clicked.connect(lambda: self.saveJadwal(wsarr))
+        # inisialisasi save button untuk praktikan
+        simpan = self.findChild(QPushButton, "simpan")
+        simpan.clicked.connect(lambda: self.saveJadwal(wsarr))
 
+        # inisialisasi save button untuk praktikan
         saveBtnAslab = self.findChild(QPushButton, "saveaslab")
         saveBtnAslab.clicked.connect(lambda: self.saveJadwalAslab(wsarr))
-        # allval =
 
-        # counter
+        # inisialisasi counter urutan kelompok
         nambah = self.findChild(QPushButton, "incButton")
         kurang = self.findChild(QPushButton, "decButton")
         kelompok = self.findChild(QLabel, "layarHitung")
@@ -57,9 +66,6 @@ class UI(QMainWindow):
 
         nambah.clicked.connect(self.counterUp)
         kurang.clicked.connect(self.counterDown)
-
-        simpan = self.findChild(QPushButton, "simpan")
-        simpan.clicked.connect(lambda: self.saveJadwal(wsarr))
 
     def deterstate(self, state):
         statelabel = self.findChild(QLabel, "label_5")
@@ -381,15 +387,23 @@ class UI(QMainWindow):
 
     def counterUp(self):
         global hitung
-        hitung += 1
-        kelompok = self.findChild(QLabel, "layarHitung")
-        kelompok.setNum(hitung)
+        if hitung+1 > 99 :
+            self.errorfunc("Nomor kelompok tidak bisa lebih dari 99 !")
+            return
+        else :
+            hitung += 1
+            kelompok = self.findChild(QLabel, "layarHitung")
+            kelompok.setNum(hitung)
 
     def counterDown(self):
         global hitung
-        hitung -= 1
-        kelompok = self.findChild(QLabel, "layarHitung")
-        kelompok.setNum(hitung)
+        if hitung-1 < 1 :
+            self.errorfunc("Nomor kelompok tidak bisa 0 !")
+            return
+        else :
+            hitung -= 1
+            kelompok = self.findChild(QLabel, "layarHitung")
+            kelompok.setNum(hitung)
 
     def insertRowSatu(self, items):
         rowPosition = self.Modul_6.rowCount()
