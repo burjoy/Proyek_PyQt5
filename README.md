@@ -7,7 +7,7 @@ Required Module
   - Gspread
 
 Terdapat 3 buah laman navigasi pada program yaitu Landing Page, Laman Praktikan, dan Laman Aslab.
-Tata Cara Penggunaan 
+## Tata Cara Penggunaan 
   1. Run Program Landing_Page.py untuk membuka laman landing Page
   2. Jika ingin masuk sebagai praktikan, tekan tombol praktikan. 
   3. Jika ingin masuk sebagai Aslab, masukan password "password123" lalu tekan tombol login
@@ -29,7 +29,7 @@ Tata Cara Penggunaan
   4. Tekan tombol "Save"
   5. Silahkan cek kembali pilihan yang anda inginkan
  
- Fitur yang terdapat pada program antara lain
+ ## Fitur yang terdapat pada program antara lain
  
   **Sebagai Aslab**
   
